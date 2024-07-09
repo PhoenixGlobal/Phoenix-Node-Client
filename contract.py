@@ -8,6 +8,7 @@ from logit_run import train_and_predict
 from node import *
 import time
 import _thread
+import os
 
 rpc = 'https://dataseed1.phoenix.global/rpc/'
 web3 = Web3(HTTPProvider(rpc))
@@ -100,7 +101,7 @@ class PhoenixNodeContract():
             else:
                 print("HeartBeat fail,please check out your local config and restart")
                 log("HeartBeat fail,please check out your local config and restart")
-                sys.exit()
+                os._exit(0)
             time.sleep(poll_interval)
 
     def checkVersion(self):
