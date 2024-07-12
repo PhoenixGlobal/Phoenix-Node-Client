@@ -115,7 +115,7 @@ class PhoenixNodeContract():
         else:
             print("Check version fail,please upgrade your local version")
             log("Check version fail,please upgrade your local version")
-            sys.exit()
+            # sys.exit()
 
 
 print("Phoenix node is ready")
