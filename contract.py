@@ -58,10 +58,6 @@ class PhoenixNodeContract():
         SubJobResult(jobId,self.key,self.node_name,computation_type,y_pred_path)
         print("Job end. JobId is ", jobId)
         log(f'Job end. JobId is {jobId}')
-        time.sleep(3)
-        SubJobResult(jobId, self.key, self.node_name, computation_type, y_pred_path)
-        print("Resend Job. JobId is ", jobId)
-        log(f'Resend Job. JobId is {jobId}')
 
     async def log_loop(self,event_filter, poll_interval):
         while True:
