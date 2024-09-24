@@ -127,7 +127,7 @@ def CleanFiles():
     exclude_file = "test.txt"
     now = time.time()
 
-    three_days_ago = now - 24 * 60 * 60
+    three_days_ago = now - 12 * 60 * 60
 
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
