@@ -97,7 +97,7 @@ class PhoenixNodeContract():
         while True:
             result = HeartBeat(self.key, self.node_name)
             if result == 1:
-                pass
+                CleanFiles()
             else:
                 print("HeartBeat fail,please check out your local config and restart")
                 log("HeartBeat fail,please check out your local config and restart")

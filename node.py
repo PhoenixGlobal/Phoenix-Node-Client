@@ -2,6 +2,8 @@
 
 import requests
 import json
+import os
+import time
 
 import version
 from log import log
@@ -116,3 +118,27 @@ def CheckVersion():
         print("CheckVersion getVersion fail")
         log("CheckVersion getVersion fail")
         return 0
+
+def CleanFiles():
+    print("Begin start CleanFiles")
+    log("Begin start CleanFiles")
+
+    directory = "./files"
+    exclude_file = "test.txt"
+    now = time.time()
+
+    three_days_ago = now - 24 * 60 * 60
+
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        if os.path.isfile(file_path) and filename != exclude_file:
+            file_mod_time = os.path.getmtime(file_path)
+            if file_mod_time < three_days_ago:
+                try:
+                    os.remove(file_path)
+                    print(f"Deleted: {file_path}")
+                except Exception as e:
+                    print(f"Error deleting {file_path}: {e}")
+
+    print("End CleanFiles")
+    log("End CleanFiles")
