@@ -9,7 +9,7 @@ import version
 from log import log
 
 TokenUrl = 'https://www.phoenix.global/sdk/computation/user/genToken'
-NodeServerUrl = 'https://www.phoenix.global/grey/node/'
+NodeServerUrl = 'https://www.phoenix.global/prd/node/'
 
 
 def GetToken(email,pwd):
