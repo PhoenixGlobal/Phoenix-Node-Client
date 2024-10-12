@@ -51,7 +51,12 @@ def SubJobResult(job_id,key,name,type,files):
     x = requests.post(NodeServerUrl+'subJobResult', files=file, data=datas)
     print("response of subJobResult is ", x.text)
     log(f'response of subJobResult is {x.text}')
-    dic = eval(x.text)
+    try:
+        dic = eval(x.text)
+    except:
+        print("eval(x.text) error,x.text is ", x.text)
+        log(f'eval(x.text) error,x.text is {x.text}')
+        return 0
     if dic['code'] == 200:
         return 1
     else:
@@ -65,9 +70,14 @@ def GetJobData(job_id,key,name):
     x = requests.get(url)
     print("response of generateData is ", x.text)
     log(f'response of generateData is {x.text}')
-    dic = eval(x.text)
     ret_arr = []
     computation_type = ""
+    try:
+        dic = eval(x.text)
+    except:
+        print("eval(x.text) error,x.text is ", x.text)
+        log(f'eval(x.text) error,x.text is {x.text}')
+        return ret_arr, computation_type
     if dic["code"] == 200:
         ret_arr.append(dic["data"]["x_train_url"])
         ret_arr.append(dic["data"]["y_train_url"])
