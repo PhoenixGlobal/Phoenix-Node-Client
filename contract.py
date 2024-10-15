@@ -87,7 +87,11 @@ class PhoenixNodeContract():
                 print("len(self.jobIdsWaitForStart)>0,len(self.jobIdsWaitForStart) is ", len(self.jobIdsWaitForStart))
                 log(f"len(self.jobIdsWaitForStart)>0,len(self.jobIdsWaitForStart) is {len(self.jobIdsWaitForStart)}")
                 jobId=self.jobIdsWaitForStart[0]
-                self.startJob(jobId)
+                try:
+                    self.startJob(jobId)
+                except:
+                    print("self.startJob(jobId) error,jobId is ", jobId)
+                    log(f'self.startJob(jobId) error,jobId is {jobId}')
                 self.jobIdsWaitForStart.remove(jobId)
             time.sleep(poll_interval)
 
