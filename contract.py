@@ -112,14 +112,20 @@ class PhoenixNodeContract():
         print("Check version")
         log("Check version")
         # result=CheckVersion(self.key,self.node_name)
-        result = CheckVersion()
-        if result == 1:
-            print("Check version success")
-            log("Check version success")
-        else:
-            print("Check version fail,please upgrade your local version")
-            log("Check version fail,please upgrade your local version")
-            # sys.exit()
+        try:
+            result = CheckVersion()
+            if result == 1:
+                print("Check version success")
+                log("Check version success")
+            else:
+                print("Check version fail,please upgrade your local version")
+                log("Check version fail,please upgrade your local version")
+                # sys.exit()
+        except Exception as e:
+            print(f"CheckVersion error,e is : {e}")
+            log(f'CheckVersion error,e is {e}')
+
+
 
 
 print("Phoenix node is ready")
