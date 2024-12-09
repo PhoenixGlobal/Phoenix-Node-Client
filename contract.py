@@ -78,6 +78,8 @@ class PhoenixNodeContract():
                     self.log_loop(event_filter, 5)))
         finally:
             loop.close()
+            print("eventMonitor error")
+            log("eventMonitor error")
 
     def runJobsLoop(self, poll_interval):
         print("Begin start runJobsLoop")
