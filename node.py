@@ -88,9 +88,14 @@ def GetJobData(job_id,key,name):
 def HeartBeat(key,name):
     params = {'key': key, 'name': name}
     x = requests.post(NodeServerUrl+'heartbeat', data=json.dumps(params))
-    dic = eval(x.text)
     print("response of HeartBeat is ", x.text)
     log(f'response of HeartBeat is {x.text}')
+    try:
+        dic = eval(x.text)
+    except:
+        print("HeartBeat eval(x.text) error,x.text is ", x.text)
+        log(f'HeartBeat eval(x.text) error,x.text is {x.text}')
+        return 1
     if dic['code'] == 200:
         return 1
     else:
