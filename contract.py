@@ -68,6 +68,13 @@ class PhoenixNodeContract():
     def eventMonitor(self):
         print("Begin start eventMonitor")
         log("Begin start eventMonitor")
+        while True:
+            print("Start tryEventMonitor")
+            log("Start tryEventMonitor")
+            self.tryEventMonitor()
+            time.sleep(2)
+
+    def tryEventMonitor(self):
         event_filter = phoenixNodesRewardsContract.events.StartJob.createFilter(fromBlock='latest')
         #event_filter = phoenixNodesRewardsContract.events.StartJob().get_logs(fromBlock=web3.eth.block_number)
 
