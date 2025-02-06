@@ -9,7 +9,8 @@ import version
 from log import log
 
 TokenUrl = 'https://www.phoenix.global/sdk/computation/user/genToken'
-NodeServerUrl = 'http://pnodeapi.phoenix.global/prd/node/'
+NodeServerUrl = 'https://www.phoenix.global/prd/node/'
+NodeJobsServerUrl = 'http://pnodeapi.phoenix.global/prd/node/'
 
 
 def GetToken(email,pwd):
@@ -48,7 +49,7 @@ def SubJobResult(job_id,key,name,type,files):
         "resultFile": (file_name,open(files, "rb"), "image/jpeg") #
     }
     datas = {'key': key, 'name': name,'computation_type':type,'job_id':job_id}
-    x = requests.post(NodeServerUrl+'subJobResult', files=file, data=datas)
+    x = requests.post(NodeJobsServerUrl+'subJobResult', files=file, data=datas)
     print("response of subJobResult is ", x.text)
     log(f'response of subJobResult is {x.text}')
     try:
@@ -66,7 +67,7 @@ def SubJobResult(job_id,key,name,type,files):
 
 def GetJobData(job_id,key,name):
     url_params = "job_id="+job_id+"&key="+key+"&name="+name
-    url=NodeServerUrl+'generateData?'+url_params
+    url=NodeJobsServerUrl+'generateData?'+url_params
     x = requests.get(url)
     print("response of generateData is ", x.text)
     log(f'response of generateData is {x.text}')
