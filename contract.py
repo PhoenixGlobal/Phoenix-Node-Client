@@ -98,6 +98,11 @@ class PhoenixNodeContract():
                 jobId=self.jobIdsWaitForStart[0]
                 try:
                     self.startJob(jobId)
+                    try:
+                        CleanFiles()
+                    except:
+                        print("RunJobsLoop CleanFiles error")
+                        log("RunJobsLoop CleanFiles error")
                 except:
                     print("self.startJob(jobId) error,jobId is ", jobId)
                     log(f'self.startJob(jobId) error,jobId is {jobId}')
@@ -110,7 +115,11 @@ class PhoenixNodeContract():
         while True:
             result = HeartBeat(self.key, self.node_name)
             if result == 1:
-                CleanFiles()
+                try:
+                    CleanFiles()
+                except:
+                    print("HeartBeat CleanFiles error")
+                    log("HeartBeat CleanFiles error")
             else:
                 print("HeartBeat fail,please check out your local config and restart")
                 log("HeartBeat fail,please check out your local config and restart")
