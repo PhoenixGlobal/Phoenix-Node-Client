@@ -71,7 +71,11 @@ class PhoenixNodeContract():
         while True:
             print("Start tryEventMonitor")
             log("Start tryEventMonitor")
-            self.tryEventMonitor()
+            try:
+                self.tryEventMonitor()
+            except:
+                print("tryEventMonitor error")
+                log("tryEventMonitor error")
             time.sleep(2)
 
     def tryEventMonitor(self):
