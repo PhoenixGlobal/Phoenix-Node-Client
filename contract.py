@@ -113,7 +113,11 @@ class PhoenixNodeContract():
         print("Begin start heartBeat")
         log("Begin start heartBeat")
         while True:
-            result = HeartBeat(self.key, self.node_name)
+            try:
+                result = HeartBeat(self.key, self.node_name)
+            except:
+                print("HeartBeat error")
+                log("HeartBeat error")
             if result == 1:
                 try:
                     CleanFiles()
@@ -123,7 +127,7 @@ class PhoenixNodeContract():
             else:
                 print("HeartBeat fail,please check out your local config and restart")
                 log("HeartBeat fail,please check out your local config and restart")
-                os._exit(0)
+                # os._exit(0)
             time.sleep(poll_interval)
 
     def checkVersion(self):
