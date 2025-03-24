@@ -28,7 +28,7 @@ def train_and_predict(uid, jobid, url_list: list):
         if os.path.exists(f_path):
             os.remove(f_path)
 
-        res = requests.get(url_list[u])
+        res = requests.get(url_list[u], timeout=(150, 480))
         with open(f_path, "wb") as f:
             f.write(res.content)
 

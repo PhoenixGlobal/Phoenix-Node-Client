@@ -107,9 +107,9 @@ class PhoenixNodeContract():
                     except:
                         print("RunJobsLoop CleanFiles error")
                         log("RunJobsLoop CleanFiles error")
-                except:
-                    print("self.startJob(jobId) error,jobId is ", jobId)
-                    log(f'self.startJob(jobId) error,jobId is {jobId}')
+                except Exception as e:
+                    print(f'self.startJob(jobId) error,jobId is {jobId},error is {e}')
+                    log(f'self.startJob(jobId) error,jobId is {jobId},error is {e}')
                 self.jobIdsWaitForStart.remove(jobId)
             time.sleep(poll_interval)
 
