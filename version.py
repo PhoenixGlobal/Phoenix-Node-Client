@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-VERSION = "v1.1.34"
+VERSION = "v1.1.35"
 
 if __name__ == "__main__":
    print(VERSION)

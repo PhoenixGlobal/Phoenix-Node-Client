@@ -74,7 +74,7 @@ class PhoenixNodeContract():
             except:
                 print("tryEventMonitor error")
                 log("tryEventMonitor error")
-            time.sleep(10)
+            time.sleep(15)
 
     def tryEventMonitor(self):
         web3 = Web3(HTTPProvider(rpc))
@@ -87,10 +87,13 @@ class PhoenixNodeContract():
             loop.run_until_complete(
                 asyncio.gather(
                     self.log_loop(event_filter, 5)))
+        except Exception as e:
+            print(f'tryEventMonitor error,error is {e}')
+            log(f'tryEventMonitor error,error is {e}')
         finally:
             loop.close()
-            print("eventMonitor error")
-            log("eventMonitor error")
+            print("eventMonitor error,close loop")
+            log("eventMonitor error,close loop")
 
     def runJobsLoop(self, poll_interval):
         print("Begin start runJobsLoop")
