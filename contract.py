@@ -63,37 +63,41 @@ class PhoenixNodeContract():
                 self.handle_event(PairCreated)
             await asyncio.sleep(poll_interval)
 
+    async def eventMonitorLoop(self):
+        while True:
+            print("Start eventMonitorLoop")
+            log("Start eventMonitorLoop")
+            try:
+                web3 = Web3(HTTPProvider(rpc))
+                phoenixNodesRewardsContract = web3.eth.contract(address=contractAddress, abi=abi)
+                event_filter = phoenixNodesRewardsContract.events.StartJob.createFilter(fromBlock='latest')
+                # event_filter = phoenixNodesRewardsContract.events.StartJob().get_logs(fromBlock=web3.eth.block_number)
+                await asyncio.gather(self.log_loop(event_filter, 5))
+            except Exception as e:
+                print(f'eventMonitorLoop error,error is {e}')
+                log(f'eventMonitorLoop error,error is {e}')
+            await asyncio.sleep(10)
+
     def eventMonitor(self):
         print("Begin start eventMonitor")
         log("Begin start eventMonitor")
-        while True:
-            print("Start tryEventMonitor")
-            log("Start tryEventMonitor")
-            try:
-                self.tryEventMonitor()
-            except:
-                print("tryEventMonitor error")
-                log("tryEventMonitor error")
-            time.sleep(15)
+        try:
+            self.tryEventMonitor()
+        except:
+            print("tryEventMonitor error")
+            log("tryEventMonitor error")
 
     def tryEventMonitor(self):
-        web3 = Web3(HTTPProvider(rpc))
-        phoenixNodesRewardsContract = web3.eth.contract(address=contractAddress, abi=abi)
-        event_filter = phoenixNodesRewardsContract.events.StartJob.createFilter(fromBlock='latest')
-        #event_filter = phoenixNodesRewardsContract.events.StartJob().get_logs(fromBlock=web3.eth.block_number)
-
         loop = asyncio.get_event_loop()
         try:
-            loop.run_until_complete(
-                asyncio.gather(
-                    self.log_loop(event_filter, 5)))
+            loop.run_until_complete(self.eventMonitorLoop())
         except Exception as e:
             print(f'tryEventMonitor error,error is {e}')
             log(f'tryEventMonitor error,error is {e}')
         finally:
             loop.close()
-            print("eventMonitor error,close loop")
-            log("eventMonitor error,close loop")
+            print("tryEventMonitor error,close loop")
+            log("tryEventMonitor error,close loop")
 
     def runJobsLoop(self, poll_interval):
         print("Begin start runJobsLoop")
