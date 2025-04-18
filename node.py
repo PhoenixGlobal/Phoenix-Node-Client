@@ -49,7 +49,7 @@ def SubJobResult(job_id,key,name,type,files):
         "resultFile": (file_name,open(files, "rb"), "image/jpeg") #
     }
     datas = {'key': key, 'name': name,'computation_type':type,'job_id':job_id}
-    x = requests.post(NodeJobsServerUrl+'subJobResult', files=file, data=datas)
+    x = requests.post(NodeJobsServerUrl+'subJobResult', files=file, data=datas, timeout=(150, 480))
     print("response of subJobResult is ", x.text)
     log(f'response of subJobResult is {x.text}')
     try:
