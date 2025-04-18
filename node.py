@@ -68,7 +68,7 @@ def SubJobResult(job_id,key,name,type,files):
 def GetJobData(job_id,key,name):
     url_params = "job_id="+job_id+"&key="+key+"&name="+name
     url=NodeJobsServerUrl+'generateData?'+url_params
-    x = requests.get(url)
+    x = requests.get(url, timeout=(150, 480))
     print("response of generateData is ", x.text)
     log(f'response of generateData is {x.text}')
     ret_arr = []
